@@ -16,22 +16,22 @@ import com.saksoft.CRUD_Operation.entity.Employee;
 import com.saksoft.CRUD_Operation.service.EmployeeService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/employee")
 public class EmployeeController {
-
+ 
 	@Autowired
 	EmployeeService employeeService;
-	 @PostMapping("/employee")
-	    public Employee createEmployee(@RequestBody Employee employee) {
-	        return employeeService.createEmployee(employee);
+	 @PostMapping("/new")
+	    public Employee addNewEmployee(@RequestBody Employee employee) {
+	        return employeeService.addEmployee(employee);
 	    }
 	 @GetMapping("/{id}")
-	    public Employee getEMployeeById(@PathVariable Long id) {
+	    public Employee getEmployeeById(@PathVariable Long id) {
 	        return employeeService.getEmployeeById(id);
 	    }
-	 @GetMapping("")
-	    public List<Employee> getAllEmployee() {
-	        return employeeService.getAllEmployee();
+	 @GetMapping("/all")
+	    public List<Employee> getAllEmployees() {
+	        return employeeService.getAllEmployees();
 	    }
 	 
 	 @PutMapping("/{id}")
@@ -40,7 +40,7 @@ public class EmployeeController {
 	 }
 	 
 	 @DeleteMapping("/{id}")
-	    public void deleteEmployee(@PathVariable Long id) {
-		 employeeService.deleteEmployee(id);
+	    public void deleteEmployeeById(@PathVariable Long id) {
+		 employeeService.deleteEmployeeById(id);
 	    }
 }

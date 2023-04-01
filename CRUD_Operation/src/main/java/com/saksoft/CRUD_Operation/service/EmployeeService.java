@@ -1,6 +1,7 @@
 package com.saksoft.CRUD_Operation.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
-	 public Employee createEmployee(Employee employee) {
+	 public Employee addEmployee(Employee employee) {
 	        return employeeRepository.save(employee);
 	    }
 
@@ -23,21 +24,21 @@ public class EmployeeService {
 		return employeeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Employee is not availbel ->" + "" + id));
 	}
 	
-	 public List<Employee> getAllEmployee() {
+	 public List<Employee> getAllEmployees() {
 	        return employeeRepository.findAll();
 	    }
 	
 	public Employee updateEmployeeById(Employee employee, Long id) {
-		Employee empl = employeeRepository.findById(id).get();
-		empl.setFirstName(employee.getFirstName());
-		empl.setLastName(employee.getLastName());
-		empl.setEmail(employee.getEmail());
-		empl.setAge(employee.getAge());
+		Employee employeeRecord= employeeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Employee is not availbel ->" + "" + id));
+		employeeRecord.setFirstName(employee.getFirstName());
+		employeeRecord.setLastName(employee.getLastName());
+		employeeRecord.setEmail(employee.getEmail());
+		employeeRecord.setAge(employee.getAge());
 		
-		return employeeRepository.save(empl);
+		return employeeRepository.save(employeeRecord);
 		
 	}
-	  public void deleteEmployee(Long id) {
+	  public void deleteEmployeeById(Long id) {
 		  employeeRepository.deleteById(id);
 	    }
 	
